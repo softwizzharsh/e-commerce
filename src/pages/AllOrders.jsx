@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import BACKEND_API from "../backendApi"
+import {BACKEND_API} from "../backendApi"
 const AllOrders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);

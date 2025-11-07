@@ -4,7 +4,7 @@ import { AuthContext } from "../context/AuthProviderContext";
 import { addToCartContext } from "../context/AddToCartContextProvider";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
-import BACKEND_API from "../backendApi"
+import {BACKEND_API} from "../backendApi"
 function TrendingProduct() {
   const [trendingProduct, setTrendingProduct] = useState([]);
   const { addToWishlist } = useContext(wishlistContext);

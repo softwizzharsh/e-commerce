@@ -1,7 +1,7 @@
 import React, { useState, useContext  } from "react";
 import { addToCartContext } from "../context/AddToCartContextProvider";
 import axios from "axios";
-import BACKEND_API from "../backendApi"
+import {BACKEND_API} from "../backendApi"
 const CheckoutPage = () => {
   const [showAnimation, setShowAnimation] = useState(false);
   const { cartItems, calculateSavings, calculateTotal, userId } = useContext(addToCartContext);

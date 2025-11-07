@@ -388,7 +388,7 @@
 
 import React, { useState, useEffect } from 'react';
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import BACKEND_API from "../../backendApi"
+import {BACKEND_API} from "../../backendApi"
 const ViewAllOrders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);

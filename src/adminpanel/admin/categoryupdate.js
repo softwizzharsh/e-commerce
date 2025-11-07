@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
-import BACKEND_API from "../../backendApi"
+import {BACKEND_API} from "../../backendApi"
 export default function Categoryupdate() {
     let { id } = useParams(); 
     console.log("Category ID:", id);  // Log to verify if ID is being passed correctly

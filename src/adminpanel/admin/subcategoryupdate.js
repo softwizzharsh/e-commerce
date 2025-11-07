@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import BACKEND_API from "../../backendApi"
+import {BACKEND_API} from "../../backendApi"
 export default function Subcategoryupdate() {
   let { id } = useParams();
   console.log(id);

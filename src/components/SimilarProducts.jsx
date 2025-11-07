@@ -5,7 +5,7 @@ import { addToCartContext } from "../context/AddToCartContextProvider";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
 import axios from "axios";
-import BACKEND_API from "../backendApi"
+import {BACKEND_API} from "../backendApi"
 function SimilarProducts({subCategory}) {
   const [similarProducts, setSimilarProducts] = useState([]);
   const {addToWishlist} =   useContext(wishlistContext)

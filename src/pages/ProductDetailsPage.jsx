@@ -5,7 +5,7 @@ import SimilarProducts from "../components/SimilarProducts";
 import { addToCartContext } from "../context/AddToCartContextProvider";
 import { wishlistContext } from "../context/WishlistContextProvider";
 import { useNavigate } from "react-router-dom";
-import BACKEND_API from "../backendApi"
+import {BACKEND_API} from "../backendApi"
 const ProductDetailsPage = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);

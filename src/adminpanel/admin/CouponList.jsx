@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import { backendApi } from "../.."; // adjust path to your backend config
 import { Table, Button, Card } from "react-bootstrap";
-import BACKEND_API from "../../backendApi"
+import {BACKEND_API} from "../../backendApi"
 function CouponList() {
   const [coupons, setCoupons] = useState([]);
   const backendApi = `${BACKEND_API}`

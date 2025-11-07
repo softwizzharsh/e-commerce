@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {Link} from "react-router-dom"
-import BACKEND_API from "../backendApi"
+import {BACKEND_API} from "../backendApi"
 function SubCategory() {
   const [swiperInstance, setSwiperInstance] = useState(null);
   const [allSubCategory, setAllSubCategory] = useState([]);

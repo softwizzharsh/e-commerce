@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import BACKEND_API from "../backendApi"
+import {BACKEND_API} from "../backendApi"
 export default function Sign() {
   const [formData, setFormData] = useState({
     firstName: "",

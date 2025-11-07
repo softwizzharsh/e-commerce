@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AuthContext } from "../context/AuthProviderContext";
 import { useContext } from "react";
 import { Link , useNavigate } from "react-router-dom";
-import BACKEND_API from "../backendApi"
+import {BACKEND_API} from "../backendApi"
 export default function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [showAlert, setShowAlert] = useState({ show: false, message: "", type: "" });

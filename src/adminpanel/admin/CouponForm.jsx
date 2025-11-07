@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import BACKEND_API from "../../backendApi"
+import {BACKEND_API} from "../../backendApi"
 import { Form, Button, Card } from "react-bootstrap";
 
 function CouponForm() {

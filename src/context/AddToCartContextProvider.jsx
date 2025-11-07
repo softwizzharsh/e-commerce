@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState ,useContext } from "react";
 import { AuthContext } from "./AuthProviderContext";
-import BACKEND_API from "../backendApi"
+import {BACKEND_API} from "../backendApi"
 export const addToCartContext = createContext();
 
 function AddToCartContextProvider({ children }) {

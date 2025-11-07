@@ -682,7 +682,7 @@
 // }
 
 import React, { useState, useEffect } from "react";
-import BACKEND_API from "../../backendApi"
+import {BACKEND_API} from "../../backendApi"
 export default function ProductAdd() {
   // Product form data states
   const [productData, setProductData] = useState({

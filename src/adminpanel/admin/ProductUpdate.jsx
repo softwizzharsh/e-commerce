@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import BACKEND_API from "../../backendApi"
+import {BACKEND_API} from "../../backendApi"
 function UpdateProduct() {
   const productId = useParams().id;
   const [product, setProduct] = useState({

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
-import BACKEND_API from "../backendApi"
+import {BACKEND_API} from "../backendApi"
 function Brand() {
   const [swiperInstance1, setSwiperInstance1] = useState(null);
   const [items, setItems] = useState([]);

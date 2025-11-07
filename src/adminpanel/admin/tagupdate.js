@@ -1,7 +1,7 @@
 import React from "react";
 import { useState,useEffect } from "react";
 import { useParams, useNavigate} from 'react-router-dom';
-import BACKEND_API from "../../backendApi"
+import {BACKEND_API} from "../../backendApi"
 export default function Tagupdate()
 {
 

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { wishlistContext } from "../context/WishlistContextProvider";
 import { AuthContext } from "../context/AuthProviderContext";
-import BACKEND_API from "../backendApi"
+import {BACKEND_API} from "../backendApi"
 
 const Product = ({categoryId, isName}) => {
   const [selectedCategory, setSelectedCategory] = useState("all");

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import BACKEND_API from "../../backendApi"
+import {BACKEND_API} from "../../backendApi"
 export default function Subcategoryadd() {
   const [subcategoryname, setsubcategoryname] = useState("");
   const [pic, setpic] = useState("");

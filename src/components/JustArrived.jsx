@@ -6,7 +6,7 @@ import { AuthContext } from "../context/AuthProviderContext";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
 import { addToCartContext } from "../context/AddToCartContextProvider";
-import BACKEND_API from "../backendApi"
+import {BACKEND_API} from "../backendApi"
 function JustArrived() {
   const [swiperInstance4, setSwiperInstance4] = useState(null);
   const [newProducts, setNewProducts] = useState([]);

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState,useEffect } from "react";
-import BACKEND_API from "../../backendApi"
+import {BACKEND_API} from "../../backendApi"
 export default function MaincategoryAdd()
 {
 

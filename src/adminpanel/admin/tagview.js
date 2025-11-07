@@ -4,7 +4,7 @@ import $ from "jquery";
 import { Link } from "react-router-dom";
 import "datatables.net-bs4";
 import "datatables.net-bs4/css/dataTables.bootstrap4.min.css";
-import BACKEND_API from "../../backendApi"
+import {BACKEND_API} from "../../backendApi"
 export default function Tagview()
 {
   const tableRef = useRef(null);

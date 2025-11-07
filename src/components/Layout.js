@@ -5,8 +5,9 @@ import { AuthContext } from "../context/AuthProviderContext";
 import { addToCartContext } from "../context/AddToCartContextProvider";
 import userProfile from "../logo.svg";
 import axios from "axios";
-import BACKEND_API from "../backendApi"
+import {BACKEND_API} from "../backendApi"
 export default function Layout() {
+ 
   const [mainCategories, setMainCategory] = useState([]);
   const [userInfo, setUserInfo] = useState({});
   const { isLogin, setIsLogin } = useContext(AuthContext);

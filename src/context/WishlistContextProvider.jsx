@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createContext } from "react";
 import axios from "axios";
-import BACKEND_API from "../backendApi"
+import {BACKEND_API} from "../backendApi"
 
 export const wishlistContext = createContext();
 function WishlistContextProvider({ children }) {
