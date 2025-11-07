@@ -4,7 +4,7 @@ import $ from "jquery";
 import { Link } from "react-router-dom";
 import "datatables.net-bs4";
 import "datatables.net-bs4/css/dataTables.bootstrap4.min.css";
-
+import BACKEND_API from "../../backendApi"
 export default function Tagview()
 {
   const tableRef = useRef(null);
@@ -12,7 +12,7 @@ export default function Tagview()
   const [items, setItems] = useState([]);
  
     useEffect(() => {
-      fetch('http://localhost:8000/api/tags')
+      fetch(`${BACKEND_API}/api/tags`)
         .then(response => response.json())
         .then(data => setItems(data))
         .catch(err => console.error("Error fetching data: ", err));
@@ -39,7 +39,7 @@ export default function Tagview()
    
      
       try{
-        const response=await fetch("http://localhost:8000/api/deletetags",{
+        const response=await fetch(`${BACKEND_API}/api/deletetags`,{
           headers:{'Content-type':'application/json'},
           method:'POST',
           body:formdata,
@@ -61,8 +61,6 @@ export default function Tagview()
       }
     }
    
-
-
     return(
         <>
          <section class="section">

@@ -5,6 +5,7 @@ import SimilarProducts from "../components/SimilarProducts";
 import { addToCartContext } from "../context/AddToCartContextProvider";
 import { wishlistContext } from "../context/WishlistContextProvider";
 import { useNavigate } from "react-router-dom";
+import BACKEND_API from "../backendApi"
 const ProductDetailsPage = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -14,12 +15,13 @@ const ProductDetailsPage = () => {
   const { id } = useParams();
   const { addProductToCart } = useContext(addToCartContext);
   const { addToWishlist } = useContext(wishlistContext);
+  
   const navigate = useNavigate();
   useEffect(() => {
     let getProduct = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8000/api/productDetail/${id}`
+          `${BACKEND_API}/api/productDetail/${id}`
         );
         if (res.data.data == null) {
           alert("product id not match ! ");

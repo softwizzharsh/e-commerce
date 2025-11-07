@@ -1,5 +1,6 @@
 import React from "react";
 import { useState,useEffect } from "react";
+import BACKEND_API from "../../backendApi"
 export default function Categoryadd()
 {
 
@@ -12,7 +13,7 @@ export default function Categoryadd()
 
 
           useEffect(() => {
-              fetch('http://localhost:8000/api/maincategory') // Ensure this is the correct endpoint
+              fetch(`${BACKEND_API}/api/maincategory`) // Ensure this is the correct endpoint
                 .then(response => response.json()) // Parse the JSON response
                 .then(data => {
                   console.log(data)
@@ -55,7 +56,7 @@ const handlesubmit=async()=>{
     });
     console.log(formdata);
     try{
-      const response=await fetch("http://localhost:8000/api/insertcategory",{
+      const response=await fetch(`${BACKEND_API}/api/insertcategory`,{
       headers:{'Content-type':'application/json'},
       method:'POST',
       body:formdata,

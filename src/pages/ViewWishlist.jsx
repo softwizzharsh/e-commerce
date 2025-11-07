@@ -3,7 +3,6 @@ import { wishlistContext } from "../context/WishlistContextProvider";
 import { Link } from "react-router-dom";
 function ViewWishlist() {
   const { wishlist, handleRemove } = useContext(wishlistContext);
-  console.log(wishlist);
   return (
     <div>
       <div className="container my-4">

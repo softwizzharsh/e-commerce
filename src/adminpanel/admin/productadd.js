@@ -682,7 +682,7 @@
 // }
 
 import React, { useState, useEffect } from "react";
-
+import BACKEND_API from "../../backendApi"
 export default function ProductAdd() {
   // Product form data states
   const [productData, setProductData] = useState({
@@ -747,7 +747,7 @@ export default function ProductAdd() {
 
   // Fetch main categories
   useEffect(() => {
-    fetch("http://localhost:8000/api/maincategory")
+    fetch(`${BACKEND_API}/api/maincategory`)
       .then((response) => response.json())
       .then((result) => {
         setData(prev => ({ ...prev, maincategories: result }));
@@ -761,7 +761,7 @@ export default function ProductAdd() {
 
   // Fetch categories
   useEffect(() => {
-    fetch("http://localhost:8000/api/categories")
+    fetch(`${BACKEND_API}/api/categories`)
       .then((response) => response.json())
       .then((result) => {
         setData(prev => ({ ...prev, categories: result }));
@@ -775,7 +775,7 @@ export default function ProductAdd() {
 
   // Fetch subcategories
   useEffect(() => {
-    fetch("http://localhost:8000/api/subcategoriesunique")
+    fetch(`${BACKEND_API}/api/subcategoriesunique`)
       .then((response) => response.json())
       .then((result) => {
         setData(prev => ({ ...prev, subcategory: result }));
@@ -789,7 +789,7 @@ export default function ProductAdd() {
 
   // Fetch tags
   useEffect(() => {
-    fetch("http://localhost:8000/api/tags")
+    fetch(`${BACKEND_API}/api/tags`)
       .then((response) => response.json())
       .then((result) => {
         setData(prev => ({ ...prev, tag: result }));
@@ -804,7 +804,7 @@ export default function ProductAdd() {
   // Fetch brands based on selected category
   useEffect(() => {
     if (selections.selectedCategory) {
-      fetch("http://localhost:8000/api/brands")
+      fetch(`${BACKEND_API}/api/brands`)
         .then((response) => response.json())
         .then((result) => {
           const filteredData = result.filter(
@@ -911,7 +911,7 @@ export default function ProductAdd() {
     };
 
     try {
-      const response = await fetch("http://localhost:8000/api/insertproduct", {
+      const response = await fetch(`${BACKEND_API}/api/insertproduct`, {
         headers: { "Content-type": "application/json" },
         method: "POST",
         body: JSON.stringify(formData),

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import BACKEND_API from "../../backendApi"
 export default function Subcategoryadd() {
   const [subcategoryname, setsubcategoryname] = useState("");
   const [pic, setpic] = useState("");
@@ -14,7 +14,7 @@ export default function Subcategoryadd() {
   const [gender, setgender] = useState("");
 
    useEffect(() => {
-          fetch('http://localhost:8000/api/maincategory') // Ensure this is the correct endpoint
+          fetch(`${BACKEND_API}/api/maincategory`) // Ensure this is the correct endpoint
             .then(response => response.json()) // Parse the JSON response
             .then(data => {
               console.log(data)
@@ -30,7 +30,7 @@ export default function Subcategoryadd() {
 
   // Fetch categories from the backend on component mount
   useEffect(() => {
-    fetch('http://localhost:8000/api/categories') // Ensure this is the correct endpoint
+    fetch(`${BACKEND_API}/api/categories`) // Ensure this is the correct endpoint
       .then(response => response.json()) // Parse the JSON response
       .then(data => {
         console.log(data)
@@ -87,7 +87,7 @@ export default function Subcategoryadd() {
     });
     console.log(formdata);
     try {
-      const response = await fetch("http://localhost:8000/api/insertsubcategory", {
+      const response = await fetch(`${BACKEND_API}/api/insertsubcategory`, {
         headers: { 'Content-type': 'application/json' },
         method: 'POST',
         body: formdata,

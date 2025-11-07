@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
-
+import BACKEND_API from "../../backendApi"
 export default function Categoryupdate() {
     let { id } = useParams(); 
     console.log("Category ID:", id);  // Log to verify if ID is being passed correctly
@@ -16,7 +16,7 @@ export default function Categoryupdate() {
 
     // Fetch main categories on initial render
     useEffect(() => {
-        fetch('http://localhost:8000/api/maincategory')
+        fetch(`${BACKEND_API}/api/maincategory`)
             .then(response => response.json())
             .then(data => {
                 console.log("Main categories fetched:", data);
@@ -33,7 +33,7 @@ export default function Categoryupdate() {
     useEffect(() => {
         const formdata = JSON.stringify({ id: id });
 
-        fetch("http://localhost:8000/api/displaycategorybyid", {
+        fetch(`${BACKEND_API}/api/displaycategorybyid`, {
             headers: { 'Content-type': 'application/json' },
             method: 'POST',
             body: formdata,
@@ -125,7 +125,7 @@ export default function Categoryupdate() {
         console.log("Form Data being sent:", formData);
 
         try {
-            const response = await fetch("http://localhost:8000/api/categoryupdate", {
+            const response = await fetch(`${BACKEND_API}/api/categoryupdate`, {
                 headers: { 'Content-type': 'application/json' },
                 method: 'POST',
                 body: JSON.stringify(formData),

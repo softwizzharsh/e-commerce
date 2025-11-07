@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
+import BACKEND_API from "../../backendApi"
 function UpdateProduct() {
   const productId = useParams().id;
   const [product, setProduct] = useState({
@@ -31,7 +31,7 @@ function UpdateProduct() {
     async function getProductById(id) {
       try {
         const res = await fetch(
-          `http://localhost:8000/api/getProductById/${id}`
+          `${BACKEND_API}/api/getProductById/${id}`
         );
         const data = await res.json();
         setProduct(data);
@@ -81,7 +81,7 @@ function UpdateProduct() {
     console.log("onUpdate :  " ,  product)
     try {
       const res = await fetch(
-        `http://localhost:8000/api/updateProduct/${product._id}`,
+        `${BACKEND_API}/api/updateProduct/${product._id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

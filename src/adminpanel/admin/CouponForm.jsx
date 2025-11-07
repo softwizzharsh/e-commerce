@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-// import { backendApi } from "../.."; // your backend URL
+import BACKEND_API from "../../backendApi"
 import { Form, Button, Card } from "react-bootstrap";
 
 function CouponForm() {
   const [couponCode, setCouponCode] = useState("");
   const [amount, setAmount] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
-  const backendApi = "http://localhost:8000/api/"
+  const backendApi = `${BACKEND_API}/`
   // Generate random coupon code
   const generateCoupon = () => {
     const randomCode = "CPN-" + Math.random().toString(36).substring(2, 10).toUpperCase();

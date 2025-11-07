@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import BACKEND_API from "../backendApi"
 export default function Sign() {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -76,7 +77,7 @@ export default function Sign() {
 
     if (Object.keys(newErrors).length === 0) {
       try {
-        const response = await fetch("http://localhost:8000/api/signup", {
+        const response = await fetch(`${BACKEND_API}/api/signup`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
@@ -85,7 +86,6 @@ export default function Sign() {
         const data = await response.json();
         if (data.success) {
           setShowAlert({ show: true, message: data.message, type: "success" });
-          console.log("✅ User registered:", data);
 
           setTimeout(() => {
             setFormData({

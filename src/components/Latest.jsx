@@ -6,6 +6,7 @@ import { AuthContext } from "../context/AuthProviderContext";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
 import { addToCartContext } from "../context/AddToCartContextProvider";
+import BACKEND_API from "../backendApi"
 function Latest() {
   const [swiperInstance4, setSwiperInstance4] = useState(null);
   const [newProducts, setNewProducts] = useState([]);
@@ -13,12 +14,11 @@ function Latest() {
   const { isLogin } = useContext(AuthContext);
   const { addProductToCart } =  useContext(addToCartContext)
   useEffect(() => {
-    fetch("http://localhost:8000/api/latestProducts")
+    fetch(`${BACKEND_API}/api/latestProducts`)
       .then((res) => res.json())
       .then((data) => setNewProducts(data.newProducts))
       .catch((error) => console.log(error));
   }, []);
-  console.log(newProducts);
   return (
     <section class="py-5 overflow-hidden">
       <div class="container-fluid">

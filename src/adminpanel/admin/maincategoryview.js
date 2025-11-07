@@ -4,13 +4,13 @@ import $ from "jquery";
 
 import "datatables.net-bs4";
 import "datatables.net-bs4/css/dataTables.bootstrap4.min.css";
-
+import BACKEND_API from "../../backendApi"
 export default function Maincategoryview() {
   const tableRef = useRef(null);
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/maincategory")
+    fetch(`${BACKEND_API}/api/maincategory`)
       .then((response) => response.json())
       .then((data) => setItems(data))
       .catch((err) => console.error("Error fetching data: ", err));
@@ -36,7 +36,7 @@ export default function Maincategoryview() {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/api/deletemaincategory",
+        `${BACKEND_API}/api/deletemaincategory`,
         {
           headers: { "Content-type": "application/json" },
           method: "POST",

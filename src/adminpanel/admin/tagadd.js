@@ -1,5 +1,6 @@
 import React from "react";
 import { useState,useEffect } from "react";
+import BACKEND_API from "../../backendApi"
 export default function Tagadd()
 {
 
@@ -10,7 +11,7 @@ export default function Tagadd()
         tagname:tagname,
     });
     try{
-       const response=await fetch("http://localhost:8000/api/inserttag",{
+       const response=await fetch(`${BACKEND_API}/api/inserttag`,{
         headers:{'Content-type':'application/json'},
         method:'POST',
         body: formdata,

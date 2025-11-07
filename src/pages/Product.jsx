@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { wishlistContext } from "../context/WishlistContextProvider";
 import { AuthContext } from "../context/AuthProviderContext";
+import BACKEND_API from "../backendApi"
 
 const Product = ({categoryId, isName}) => {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -25,7 +26,7 @@ const Product = ({categoryId, isName}) => {
       console.log(findCategory)
       try {
         const res = await axios.get(
-          `http://localhost:8000/getCategoryByMainCategory/${findCategory}?limit=${limit}&page=${page}`
+          `${BACKEND_API}/getCategoryByMainCategory/${findCategory}?limit=${limit}&page=${page}`
         );
         setCategories(res.data.categories);
         setProducts(res.data.product);
@@ -40,7 +41,7 @@ const Product = ({categoryId, isName}) => {
      async function bySubCategories() {
       try {
         const res = await axios.get(
-          `http://localhost:8000/bysubCategories/${categoryId}`
+          `${BACKEND_API}/bysubCategories/${categoryId}`
         );
         if (res.data.isFind){  
           byMainCategory(res.data.data.maincategory)
@@ -56,7 +57,7 @@ const Product = ({categoryId, isName}) => {
     async function byBrand() {
       try {
         const res = await axios.get(
-          `http://localhost:8000/bybrand/${categoryId}`
+          `${BACKEND_API}/bybrand/${categoryId}`
         );
         console.log(res.data)
         if (res.data.isFind){  

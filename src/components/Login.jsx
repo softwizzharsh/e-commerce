@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AuthContext } from "../context/AuthProviderContext";
 import { useContext } from "react";
 import { Link , useNavigate } from "react-router-dom";
+import BACKEND_API from "../backendApi"
 export default function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [showAlert, setShowAlert] = useState({ show: false, message: "", type: "" });
@@ -14,7 +15,7 @@ export default function Login() {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/login", {
+      const response = await fetch(`${BACKEND_API}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

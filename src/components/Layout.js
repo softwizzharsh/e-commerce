@@ -5,7 +5,7 @@ import { AuthContext } from "../context/AuthProviderContext";
 import { addToCartContext } from "../context/AddToCartContextProvider";
 import userProfile from "../logo.svg";
 import axios from "axios";
-
+import BACKEND_API from "../backendApi"
 export default function Layout() {
   const [mainCategories, setMainCategory] = useState([]);
   const [userInfo, setUserInfo] = useState({});
@@ -26,7 +26,7 @@ export default function Layout() {
   
   async function getSubCategory() {
     try {
-      const res = await axios.get("http://localhost:8000/api/subcategories");
+      const res = await axios.get(`${BACKEND_API}/api/subcategories`);
       setAllSubCategory(res.data);
     } catch (error) {
       console.log(error);
@@ -39,7 +39,7 @@ export default function Layout() {
 
   async function getMainCategory() {
     try {
-      const res = await axios.get("http://localhost:8000/api/maincategory");
+      const res = await axios.get(`${BACKEND_API}/api/maincategory`);
       setMainCategory(res.data);
     } catch (error) {
       console.log(error);
@@ -56,7 +56,7 @@ export default function Layout() {
     }
     console.log(cartItems)
 
-    fetch(`http://localhost:8000/api/checkToken?token=${token}`)
+    fetch(`${BACKEND_API}/api/checkToken?token=${token}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

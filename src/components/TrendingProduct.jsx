@@ -4,13 +4,14 @@ import { AuthContext } from "../context/AuthProviderContext";
 import { addToCartContext } from "../context/AddToCartContextProvider";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
+import BACKEND_API from "../backendApi"
 function TrendingProduct() {
   const [trendingProduct, setTrendingProduct] = useState([]);
   const { addToWishlist } = useContext(wishlistContext);
   const { isLogin } = useContext(AuthContext);
   const { addProductToCart } = useContext(addToCartContext);
   useEffect(() => {
-    fetch("http://localhost:8000/api/trendingProduct")
+    fetch(`${BACKEND_API}/api/trendingProduct`)
       .then((res) => res.json())
       .then((data) => setTrendingProduct(data.trendingProduct))
       .catch((error) => console.log(error));

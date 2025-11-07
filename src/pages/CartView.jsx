@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { addToCartContext } from "../context/AddToCartContextProvider";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import BACKEND_API from "../backendApi"
 const CartView = () => {
   const [coupon, setCoupon] = useState("");
   const [message, setMessage] = useState("");
@@ -22,7 +23,7 @@ const CartView = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:8000/api/checkCoupon", {
+      const res = await axios.post(`${BACKEND_API}/api/checkCoupon`, {
         coupon,
       });
 

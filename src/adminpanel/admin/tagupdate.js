@@ -1,6 +1,7 @@
 import React from "react";
 import { useState,useEffect } from "react";
 import { useParams, useNavigate} from 'react-router-dom';
+import BACKEND_API from "../../backendApi"
 export default function Tagupdate()
 {
 
@@ -12,7 +13,7 @@ export default function Tagupdate()
   const [itemcat,setitemcat]=useState([]);
 
   useState(()=>{
-    fetch('http://localhost:8000//api/tagupdate')
+    fetch(`${BACKEND_API}/api/tagupdate`)
     .then(response=>response.json())
     .then(data=>setitemcat(data))
     .catch(err=>console.error("error fetching data: ",err));
@@ -31,7 +32,7 @@ export default function Tagupdate()
           }); 
         
           try{
-            const response= fetch("http://localhost:8000/api/displaytagbyid",{
+            const response= fetch(`${BACKEND_API}/api/displaytagbyid`,{
               headers:{'Content-type':'application/json'},
               method:'POST',
               body:formdata,      
@@ -62,7 +63,7 @@ export default function Tagupdate()
         })
 
         try{
-            const response=await fetch("http://localhost:8000/api/tagupdate",{
+            const response=await fetch(`${BACKEND_API}/api/tagupdate`,{
              headers:{'Content-type':'application/json'},
              method:'POST',
              body:formdata ,

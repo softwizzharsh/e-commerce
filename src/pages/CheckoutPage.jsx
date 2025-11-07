@@ -1,6 +1,7 @@
 import React, { useState, useContext  } from "react";
 import { addToCartContext } from "../context/AddToCartContextProvider";
 import axios from "axios";
+import BACKEND_API from "../backendApi"
 const CheckoutPage = () => {
   const [showAnimation, setShowAnimation] = useState(false);
   const { cartItems, calculateSavings, calculateTotal, userId } = useContext(addToCartContext);
@@ -71,7 +72,7 @@ const CheckoutPage = () => {
     if (userId) {
       try {
         const res = await axios.post(
-          "http://localhost:8000/api/orders/checkout",
+          `${BACKEND_API}/api/orders/checkout`,
           {
             userId,
             permanentAddress,
@@ -91,7 +92,7 @@ const CheckoutPage = () => {
             handler: async function (response) {
               try {
                 const paymentRes = await fetch(
-                  `http://localhost:8000/api/orders/${res.data.order._id}`,
+                  `${BACKEND_API}/api/orders/${res.data.order._id}`,
                   {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },

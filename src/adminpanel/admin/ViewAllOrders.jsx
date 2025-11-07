@@ -388,7 +388,7 @@
 
 import React, { useState, useEffect } from 'react';
 // import 'bootstrap/dist/css/bootstrap.min.css';
-
+import BACKEND_API from "../../backendApi"
 const ViewAllOrders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -396,8 +396,6 @@ const ViewAllOrders = () => {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [updating, setUpdating] = useState(false);
-
-  const API_BASE_URL = 'http://localhost:8000/api/orders'; // Change to your API URL
 
   // Fetch all orders on component mount
   useEffect(() => {
@@ -407,7 +405,7 @@ const ViewAllOrders = () => {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/getAllOrders/data`, {
+      const response = await fetch(`${BACKEND_API}/getAllOrders/data`, {
         headers: {
         //   'Authorization': `Bearer ${TOKEN}`,
           'Content-Type': 'application/json'
@@ -459,7 +457,7 @@ const ViewAllOrders = () => {
   const handleStatusChange = async (orderId, newStatus) => {
     try {
       setUpdating(true);
-      const response = await fetch(`${API_BASE_URL}/updateOrderByAdmin/${orderId}`, {
+      const response = await fetch(`${BACKEND_API}/updateOrderByAdmin/${orderId}`, {
         method: 'PATCH',
         headers: {
         //   'Authorization': `Bearer ${TOKEN}`,

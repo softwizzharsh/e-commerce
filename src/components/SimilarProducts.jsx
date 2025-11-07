@@ -5,6 +5,7 @@ import { addToCartContext } from "../context/AddToCartContextProvider";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
 import axios from "axios";
+import BACKEND_API from "../backendApi"
 function SimilarProducts({subCategory}) {
   const [similarProducts, setSimilarProducts] = useState([]);
   const {addToWishlist} =   useContext(wishlistContext)
@@ -13,7 +14,7 @@ function SimilarProducts({subCategory}) {
   useEffect(() => {
     ( async()=>{
       try {
-        const res =  await axios.get(`http://localhost:8000/api/similarProduct/${subCategory}`)
+        const res =  await axios.get(`${BACKEND_API}/api/similarProduct/${subCategory}`)
         if(res.statusText === "OK"){
           setSimilarProducts(res.data)
         }

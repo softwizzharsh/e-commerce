@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import BACKEND_API from "../backendApi"
 const AllOrders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -19,7 +20,7 @@ const AllOrders = () => {
       const userId = localStorage.getItem("userID");
       if (userId) {
         const res = await axios.get(
-          `http://localhost:8000/api/orders/${userId}`
+          `${BACKEND_API}/api/orders/${userId}`
         );
         setOrders(res.data);
       }

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import BACKEND_API from "../../backendApi"
 export default function Productview() {
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/showProducts")
+    fetch(`${BACKEND_API}/api/showProducts`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -18,7 +19,7 @@ export default function Productview() {
 
   function deleteProduct(e) {
     const { id } = e.target;
-    fetch("http://localhost:8000/api/deleteProduct", {
+    fetch(`${BACKEND_API}/api/deleteProduct`, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
       body: JSON.stringify({ _id: id }),

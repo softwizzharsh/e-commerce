@@ -6,7 +6,7 @@ import { AuthContext } from "../context/AuthProviderContext";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
 import { addToCartContext } from "../context/AddToCartContextProvider";
-
+import BACKEND_API from "../backendApi"
 function JustArrived() {
   const [swiperInstance4, setSwiperInstance4] = useState(null);
   const [newProducts, setNewProducts] = useState([]);
@@ -14,7 +14,7 @@ function JustArrived() {
   const { isLogin } = useContext(AuthContext);
   const { addProductToCart } =  useContext(addToCartContext)
   useEffect(() => {
-    fetch("http://localhost:8000/api/newProducts")
+    fetch(`${BACKEND_API}/api/newProducts`)
       .then((res) => res.json())
       .then((data) => setNewProducts(data.newProducts))
       .catch((error) => console.log(error));

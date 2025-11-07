@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createContext } from "react";
 import axios from "axios";
 export const wishlistContext = createContext();
+import BACKEND_API from "../backendApi"
 function WishlistContextProvider({ children }) {
   const [wishlist, setWishlist] = useState({});
   const userId = localStorage.getItem("userID");
@@ -9,7 +10,7 @@ function WishlistContextProvider({ children }) {
     try {
       if (userId) {
         const res = await fetch(
-          `http://localhost:8000/api/wishlist/${userId}/add`,
+          `${BACKEND_API}/api/wishlist/${userId}/add`,
           {
             method: "post",
             body: JSON.stringify({ productId : id }),
@@ -32,7 +33,7 @@ function WishlistContextProvider({ children }) {
   
   async function getWishlist() {
       try {
-        const res =  await fetch(`http://localhost:8000/api/wishlist/${userId}`)
+        const res =  await fetch(`${BACKEND_API}/api/wishlist/${userId}`)
         const data = await res.json()
         setWishlist(data)
       } catch (error) {
@@ -49,7 +50,7 @@ function WishlistContextProvider({ children }) {
     // Remove from wishlist
   const handleRemove = async (productId) => {
     try {
-      await axios.delete(`http://localhost:8000/api/wishlist/${userId}/remove`, {
+      await axios.delete(`${BACKEND_API}/api/wishlist/${userId}/remove`, {
         data: { productId },
       });
      getWishlist()

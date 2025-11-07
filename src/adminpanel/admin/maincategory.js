@@ -1,5 +1,6 @@
 import React from "react";
 import { useState,useEffect } from "react";
+import BACKEND_API from "../../backendApi"
 export default function MaincategoryAdd()
 {
 
@@ -12,7 +13,7 @@ export default function MaincategoryAdd()
         });
         console.log(formdata);
         try{
-          const response=await fetch("http://localhost:8000/api/insertmaincategory",{
+          const response=await fetch(`${BACKEND_API}/api/insertmaincategory`,{
           headers:{'Content-type':'application/json'},
           method:'POST',
           body:formdata,

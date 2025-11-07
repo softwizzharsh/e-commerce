@@ -2,12 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {Link} from "react-router-dom"
+import BACKEND_API from "../backendApi"
 function SubCategory() {
   const [swiperInstance, setSwiperInstance] = useState(null);
   const [allSubCategory, setAllSubCategory] = useState([]);
   async function getSubCategory() {
     try {
-      const res = await axios.get("http://localhost:8000/api/subcategories");
+      const res = await axios.get(`${BACKEND_API}/api/subcategories`);
       setAllSubCategory(res.data);
     } catch (error) {
       console.log(error);

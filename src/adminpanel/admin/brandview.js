@@ -4,12 +4,12 @@ import $ from "jquery";
 
 import "datatables.net-bs4";
 import "datatables.net-bs4/css/dataTables.bootstrap4.min.css";
-
+import BACKEND_API from "../../backendApi"
 export default function Brandview() {
   const tableRef = useRef(null);
   const [items, setItems] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:8000/api/brands")
+    fetch(`${BACKEND_API}/api/brands`)
       .then((response) => response.json())
       .then((data) => setItems(data))
       .catch((err) => console.error("Error fetching data: ", err));
@@ -33,7 +33,7 @@ export default function Brandview() {
     });
 
     try {
-      const response = await fetch("http://localhost:8000/api/deletebrands", {
+      const response = await fetch(`${BACKEND_API}/api/deletebrands`, {
         headers: { "Content-type": "application/json" },
         method: "POST",
         body: formdata,
@@ -50,7 +50,6 @@ export default function Brandview() {
       console.log(error);
     }
   }
-console.log(items)
   return (
     <>
       <section class="section">

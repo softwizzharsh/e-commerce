@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-
+import BACKEND_API from "../../backendApi"
 export default function Subcategoryupdate() {
   let { id } = useParams();
   console.log(id);
@@ -20,7 +20,7 @@ export default function Subcategoryupdate() {
   const [itemcat, setitemcat] = useState([]);
   const [picstatus, setpicstatus] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:8000/api/maincategory") // Ensure this is the correct endpoint
+    fetch(`${BACKEND_API}/api/maincategory`) // Ensure this is the correct endpoint
       .then((response) => response.json()) // Parse the JSON response
       .then((data) => {
         console.log(data);
@@ -35,7 +35,7 @@ export default function Subcategoryupdate() {
 
   // Fetch categories from the backend on component mount
   useEffect(() => {
-    fetch("http://localhost:8000/api/categories") // Ensure this is the correct endpoint
+    fetch(`${BACKEND_API}/api/categories`) // Ensure this is the correct endpoint
       .then((response) => response.json()) // Parse the JSON response
       .then((data) => {
         console.log(data);
@@ -63,7 +63,7 @@ export default function Subcategoryupdate() {
   }, [selectedmaincategory]);
 
   useState(() => {
-    fetch("http://localhost:8000/subcategoryupdate")
+    fetch(`${BACKEND_API}/subcategoryupdate`)
       .then((response) => response.json())
       .then((data) => setitemcat(data))
       .catch((err) => console.error("error fetching data: ", err));
@@ -76,7 +76,7 @@ export default function Subcategoryupdate() {
 
     try {
       const response = fetch(
-        "http://localhost:8000/api/displaysubcategorybyid",
+        `${BACKEND_API}/api/displaysubcategorybyid`,
         {
           headers: { "Content-type": "application/json" },
           method: "POST",
@@ -160,7 +160,7 @@ export default function Subcategoryupdate() {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/api/subcategoryupdate",
+        `${BACKEND_API}/api/subcategoryupdate`,
         {
           headers: { "Content-type": "application/json" },
           method: "POST",

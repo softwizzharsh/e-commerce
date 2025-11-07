@@ -6,6 +6,7 @@ import { AuthContext } from "../context/AuthProviderContext";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
 import { addToCartContext } from "../context/AddToCartContextProvider";
+import BACKEND_API from "../backendApi"
 function SearchData() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -21,7 +22,7 @@ function SearchData() {
   async function getData() {
     try {
       const res = await fetch(
-        `http://localhost:8000/api/products/search?q=${q}&category=${category}`
+        `${BACKEND_API}/api/products/search?q=${q}&category=${category}`
       );
       const data = await res.json();
 

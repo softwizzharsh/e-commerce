@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState ,useContext } from "react";
 import { AuthContext } from "./AuthProviderContext";
+import BACKEND_API from "../backendApi"
 export const addToCartContext = createContext();
 
 function AddToCartContextProvider({ children }) {
@@ -14,7 +15,7 @@ function AddToCartContextProvider({ children }) {
   const fetchCartData = async () => {
     if (userId) {
     try {
-        const res = await fetch(`http://localhost:8000/api/cart/${userId}`);
+        const res = await fetch(`${BACKEND_API}/api/cart/${userId}`);
         const data = await res.json();
         if (data.isError){
           setCartItems([])
@@ -43,7 +44,7 @@ function AddToCartContextProvider({ children }) {
   const addProductToCart = async (productId, quantity) => {
     try {
       if (userId) {
-        const res = await fetch("http://localhost:8000/api/cart/add", {
+        const res = await fetch(`${BACKEND_API}/api/cart/add`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ userId, productId, quantity }),
@@ -62,7 +63,7 @@ function AddToCartContextProvider({ children }) {
   const removeFromCart = async (productId) => {
     console.log(productId)
     const res = await fetch(
-      `http://localhost:8000/api/cart/${userId}/${productId}`,
+      `${BACKEND_API}/api/cart/${userId}/${productId}`,
       { method: "DELETE" }
     );
     const data = await res.json();
