@@ -20,7 +20,8 @@ app.use("/api/wishlist", wishlistRoutes);
 app.use("/api/cart", cartRouters);
 app.use("/api/orders", orderRoutes);
 
-const dbURI = "mongodb://localhost:27017";
+// const dbURI = "mongodb://localhost:27017";
+const dbURI = "mongodb+srv://softwizzharsh_db_user:81MZ3DfjlVPmOX9d@cluster0.h1usotm.mongodb.net/?appName=Cluster0";
 
 mongoose.connect(dbURI, {
   dbName: "shopping",
