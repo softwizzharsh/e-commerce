@@ -13,7 +13,7 @@ const orderRoutes = require("./routes/order");
 // const { populate } = require("./model/wishlist");
 
 app.use(cors({
-  origin  :  ["http://localhost:3000" , "https://marvelous-bavarois-3945e4.netlify.app/"] , 
+  origin  :  ["http://localhost:3000" , "https://marvelous-bavarois-3945e4.netlify.app"] , 
   credentials : true 
 }));
 app.use(express.json());
