@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {BACKEND_API} from "../backendApi"
+import { useNavigate } from "react-router-dom";
 export default function Sign() {
+  const navigate =  useNavigate()
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -86,7 +88,6 @@ export default function Sign() {
         const data = await response.json();
         if (data.success) {
           setShowAlert({ show: true, message: data.message, type: "success" });
-
           setTimeout(() => {
             setFormData({
               firstName: "",
@@ -97,6 +98,7 @@ export default function Sign() {
               agreeToTerms: false,
             });
             setShowAlert({ show: false, message: "", type: "success" });
+            navigate("/login")
           }, 3000);
         } else {
           setShowAlert({ show: true, message: data.message, type: "danger" });
