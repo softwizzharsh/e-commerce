@@ -14,7 +14,7 @@ const Order = require('./model/order');
 // const { populate } = require("./model/wishlist");
 
 app.use(cors({
-  origin  :  ["http://localhost:3000" , "https://marvelous-bavarois-3945e4.netlify.app"] , 
+  origin  :  ["http://localhost:3000" ,] , 
   credentials : true 
 }));
 app.use(express.json());
@@ -24,8 +24,8 @@ app.use("/api/wishlist", wishlistRoutes);
 app.use("/api/cart", cartRouters);
 app.use("/api/orders", orderRoutes);
 
-const dbURI = "mongodb://localhost:27017";
-// const dbURI = "mongodb+srv://softwizzharsh_db_user:81MZ3DfjlVPmOX9d@cluster0.h1usotm.mongodb.net/?appName=Cluster0";
+// const dbURI = "mongodb://localhost:27017";
+const dbURI = "mongodb+srv://softwizzharsh_db_user:81MZ3DfjlVPmOX9d@cluster0.h1usotm.mongodb.net/?appName=Cluster0";
 
 mongoose.connect(dbURI, {
   dbName: "shopping",
