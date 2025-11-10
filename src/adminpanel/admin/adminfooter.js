@@ -11,8 +11,8 @@ export default function Adminfooter()
               <div class="copyright text-center text-md-start">
                 <p class="text-sm">
                   Designed and Developed by
-                  <a href="https://plainadmin.com" rel="nofollow" target="_blank">
-                    PlainAdmin
+                  <a href="https://softwizz.in" rel="nofollow" target="_blank">
+                     {" "}Softwizz 
                   </a>
                 </p>
               </div>

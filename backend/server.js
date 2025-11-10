@@ -10,6 +10,7 @@ const PORT = 8000;
 const wishlistRoutes = require("./routes/wishlistRoutes")
 const cartRouters = require("./routes/cart")
 const orderRoutes = require("./routes/order");
+const Order = require('./model/order');
 // const { populate } = require("./model/wishlist");
 
 app.use(cors({
@@ -23,8 +24,8 @@ app.use("/api/wishlist", wishlistRoutes);
 app.use("/api/cart", cartRouters);
 app.use("/api/orders", orderRoutes);
 
-// const dbURI = "mongodb://localhost:27017";
-const dbURI = "mongodb+srv://softwizzharsh_db_user:81MZ3DfjlVPmOX9d@cluster0.h1usotm.mongodb.net/?appName=Cluster0";
+const dbURI = "mongodb://localhost:27017";
+// const dbURI = "mongodb+srv://softwizzharsh_db_user:81MZ3DfjlVPmOX9d@cluster0.h1usotm.mongodb.net/?appName=Cluster0";
 
 mongoose.connect(dbURI, {
   dbName: "shopping",
@@ -823,6 +824,122 @@ app.get("/api/products/search",async(req ,res)=>{
     res.status(500).json({ success: false, message: "Server Error" });
   }
 })
+
+
+app.get('/api/counts', async (req, res) => {
+  try {
+    const [ mainCategoryCount,categoryCount,
+      subCategoryCount,
+      productCount,
+      brandCount,
+      tagCount,
+      orderCount,
+      couponCount
+    ] = await Promise.all([
+      Maincategory.countDocuments(),
+      Category.countDocuments(),
+      Subcategory.countDocuments(),
+      Product.countDocuments(),
+      Brand.countDocuments(),
+      Tag.countDocuments(),
+      Order.countDocuments(),
+      Coupon.countDocuments({ isActive: true })
+    ]);
+
+    res.json({
+      success: true,
+      data: {
+        mainCategory: mainCategoryCount,
+        category: categoryCount,
+        subCategory: subCategoryCount,
+        product: productCount,
+        brand: brandCount,
+        tag: tagCount,
+        order: orderCount,
+        coupon: couponCount
+      }
+    });
+    
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching counts',
+      error: error.message
+    });
+  }
+});
+
+
+
+const blogSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  postOn: { type: Date, required: true },
+  image: { type: String, required: true }, // store image filename or URL
+});
+
+const Blog =  mongoose.model("Blog", blogSchema)
+
+// Add blog route
+app.post("/api/blogs", async (req, res) => {
+  try {
+    const { title, description, postOn , image } = req.body;
+    const newBlog = new Blog({ title, description, postOn, image });
+    await newBlog.save();
+    res.status(201).json({ message: "Blog added successfully", blog: newBlog });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error adding blog", error });
+  }
+});
+
+// READ Blogs
+app.get("/api/blogs", async (req, res) => {
+  try {
+    const blogs = await Blog.find().sort({ createdAt: -1 });
+    res.json(blogs);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching blogs" });
+  }
+});
+
+// UPDATE Blog
+app.put("/api/blogs/:id", async (req, res) => {
+  try {
+    const { title, description, postOn } = req.body;
+    const updateData = { title, description, postOn };
+
+    const updated = await Blog.findByIdAndUpdate(req.params.id, updateData, {
+      new: true,
+    });
+
+    if (!updated) return res.status(404).json({ message: "Blog not found" });
+    res.json(updated);
+  } catch (err) {
+    res.status(500).json({ message: "Error updating blog", error: err.message });
+  }
+});
+
+// DELETE Blog
+app.delete("/api/blogs/:id", async (req, res) => {
+  try {
+    const deleted = await Blog.findByIdAndDelete(req.params.id);
+    if (!deleted) return res.status(404).json({ message: "Blog not found" });
+    res.json({ message: "Blog deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Error deleting blog", error: err.message });
+  }
+});
+
+app.get("/api/blog/:id", async (req, res) => {
+  try {
+    const blog = await Blog.findById(req.params.id);
+    if (!blog) return res.status(404).json({ message: "Blog not found" });
+    res.json(blog);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching blog details", error: err.message });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);

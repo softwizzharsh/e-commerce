@@ -405,7 +405,7 @@ const ViewAllOrders = () => {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${BACKEND_API}/getAllOrders/data`, {
+      const response = await fetch(`${BACKEND_API}/api/orders/getAllOrders/data`, {
         headers: {
         //   'Authorization': `Bearer ${TOKEN}`,
           'Content-Type': 'application/json'
@@ -413,7 +413,7 @@ const ViewAllOrders = () => {
       });
 
       const data = await response.json();
-
+      console.log(data)
       if (data.success) {
         setOrders(data.data);
         setError(null);

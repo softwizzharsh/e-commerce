@@ -44,6 +44,10 @@ import OrderConfirmationPage from "./pages/OrderConfirmationPage.jsx";
 import AllOrders from "./pages/AllOrders.jsx";
 import ViewAllOrders from "./adminpanel/admin/ViewAllOrders.jsx";
 import SearchData from "./components/SearchData.jsx";
+import AddBlog from "./adminpanel/admin/AddBlog.jsx";
+import ViewBlogs from "./adminpanel/admin/ViewBlogs.jsx";
+import AllBlog from "./pages/AllBlog.jsx";
+import BlogDetails from "./pages/BlogDetails.jsx";
 function App() {
   return (
     <div className="App">
@@ -69,6 +73,8 @@ function App() {
                   <Route path="brandview" element={<Brandview />} />
                   <Route path="tagadd" element={<Tagadd />} />
                   <Route path="couponAdd" element={<CouponForm />} />
+                  <Route path="addblog" element={<AddBlog />} />
+                  <Route path="viewblogs" element={<ViewBlogs />} />
                   <Route path="couponView" element={<CouponList />} />
                   <Route path="tagview" element={<Tagview />} />
                   <Route path="tagupdate/:id" element={<Tagupdate />} />
@@ -101,6 +107,8 @@ function App() {
                   <Route path="login" element={<Login />} />
                   <Route path="sign" element={<Sign />} />
                   <Route path="cart" element={<CartView />} />
+                  <Route path="blogs" element={<AllBlog />} />
+                  <Route path="blog/:id" element={<BlogDetails />} />
                   <Route path="checkout" element={<CheckoutPage />} />
                   <Route path="orderConfirmation" element={<OrderConfirmationPage />} />
                   <Route path="allOrders" element={<AllOrders />} />
