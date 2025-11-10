@@ -14,8 +14,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 // import '../assets/js/main.js';
 
-import '../assets/js/loading-bar.min.js';
-import '../assets/js/moment.min.js';
+// import '../assets/js/loading-bar.min.js';
+// import '../assets/js/moment.min.js';
 
 
 export default function Adminlayout() {
