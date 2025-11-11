@@ -548,13 +548,13 @@ export default function Layout() {
                         );
                       })}
 
-                      <li class="nav-item">
+                      {/* <li class="nav-item">
                         <a href="#accessories" class="nav-link">
                           Accessories
                         </a>
-                      </li>
+                      </li> */}
 
-                      <li class="nav-item dropdown">
+                      {/* <li class="nav-item dropdown">
                         <a
                           class="nav-link dropdown-toggle"
                           role="button"
@@ -626,7 +626,7 @@ export default function Layout() {
                             </a>
                           </li>
                         </ul>
-                      </li>
+                      </li> */}
                       {/* <li class="nav-item">
                         <a href="#brand" class="nav-link">
                           Brand

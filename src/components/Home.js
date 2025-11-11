@@ -282,9 +282,11 @@ export default function Home() {
                       </label>
                     </div>
                     <div class="d-grid gap-2">
+                      <Link to={"login"}>
                       <button type="submit" class="btn btn-dark btn-lg">
                         Get Discount
                       </button>
+                      </Link>
                     </div>
                   </form>
                 </div>
@@ -392,14 +394,8 @@ export default function Home() {
           <div class="bg-warning py-5 rounded-5 div2">
             <div class="container">
               <div class="row">
-                <div class="col-md-4">
-                  <img
-                    src={require("../images/phone.png")}
-                    alt="phone"
-                    class="image-float img-fluid"
-                  />
-                </div>
-                <div class="col-md-8">
+              
+                <div class="col-md-9">
                   <h2 class="my-5">Shop smarter with the StyleMart App</h2>
                   <p>
                     Discover the latest trends, exclusive collections, and
@@ -426,7 +422,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section class="py-5">
+      {/* <section class="py-5">
         <div class="container-fluid">
           <h2 class="my-5">People are also looking for</h2>
           <a href="#" class="btn btn-warning me-2 mb-2">
@@ -484,7 +480,7 @@ export default function Home() {
             Chicken meatballs
           </a>
         </div>
-      </section>
+      </section> */}
 
       {/* <section class="py-5">
         <div class="container-fluid">
