@@ -6,6 +6,7 @@ import { addToCartContext } from "../context/AddToCartContextProvider";
 import { wishlistContext } from "../context/WishlistContextProvider";
 import { useNavigate } from "react-router-dom";
 import {BACKEND_API} from "../backendApi"
+import { Link } from "react-router-dom";
 const ProductDetailsPage = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -303,19 +304,19 @@ const ProductDetailsPage = () => {
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb mb-0">
                 <li className="breadcrumb-item">
-                  <a href="#" className="text-decoration-none text-muted">
+                  <Link to={"/"} className="text-decoration-none text-muted">
                     Home
-                  </a>
+                  </Link>
                 </li>
                 <li className="breadcrumb-item">
-                  <a href="#" className="text-decoration-none text-muted">
+                  <Link to="/" className="text-decoration-none text-muted">
                     {product.maincategory?.maincategory}
-                  </a>
+                  </Link>
                 </li>
                 <li className="breadcrumb-item">
-                  <a href="#" className="text-decoration-none text-muted">
+                  <Link to="/" className="text-decoration-none text-muted">
                     {product.category?.title}
-                  </a>
+                  </Link>
                 </li>
                 <li
                   className="breadcrumb-item active text-dark fw-medium"
@@ -360,7 +361,7 @@ const ProductDetailsPage = () => {
                       key={index}
                       src={image}
                       className={`thumbnail ${
-                        selectedImage === index ? "active" : ""
+                        selectedImage == index ? "active" : ""
                       }`}
                       onClick={() => handleImageChange(index)}
                       alt={`${product.productname} ${index + 1}`}
