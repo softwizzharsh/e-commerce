@@ -41,6 +41,7 @@ function AddToCartContextProvider({ children }) {
   useEffect(()=>{
     fetchCartData()
   } , [isLogin])
+  
   const addProductToCart = async (productId, quantity) => {
     try {
       if (userId) {

@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { wishlistContext } from "../context/WishlistContextProvider";
 import { AuthContext } from "../context/AuthProviderContext";
-import {BACKEND_API} from "../backendApi"
+import { BACKEND_API } from "../backendApi";
+import { addToCartContext } from "../context/AddToCartContextProvider";
 
-const Product = ({categoryId, isName}) => {
+const Product = ({ categoryId, isName }) => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedSubCategory, setSelectedSubCategory] = useState("");
@@ -20,10 +21,10 @@ const Product = ({categoryId, isName}) => {
   const [limit, setLimit] = useState(9);
   const { addToWishlist } = useContext(wishlistContext);
   const { isLogin } = useContext(AuthContext);
+  const { addProductToCart } = useContext(addToCartContext);
   const [meta, setMeta] = useState({});
   useEffect(() => {
     async function byMainCategory(findCategory) {
-      console.log(findCategory)
       try {
         const res = await axios.get(
           `${BACKEND_API}/getCategoryByMainCategory/${findCategory}?limit=${limit}&page=${page}`
@@ -37,43 +38,41 @@ const Product = ({categoryId, isName}) => {
         console.log(error);
       }
     }
-    
-     async function bySubCategories() {
+
+    async function bySubCategories() {
       try {
         const res = await axios.get(
           `${BACKEND_API}/bysubCategories/${categoryId}`
         );
-        if (res.data.isFind){  
-          byMainCategory(res.data.data.maincategory)
-          setSelectedSubCategory(categoryId)
-          setSelectedCategory(res.data.data.category)
+        if (res.data.isFind) {
+          byMainCategory(res.data.data.maincategory);
+          setSelectedSubCategory(categoryId);
+          setSelectedCategory(res.data.data.category);
         }
       } catch (error) {
         console.log(error);
-        alert(" data not Found !")
+        alert(" data not Found !");
       }
     }
 
     async function byBrand() {
       try {
-        const res = await axios.get(
-          `${BACKEND_API}/bybrand/${categoryId}`
-        );
-        console.log(res.data)
-        if (res.data.isFind){  
-          console.log(res.data.data._id)
-          byMainCategory(res.data.data.maincategory._id)
-          setSelectedBrand(categoryId)
-          setSelectedCategory(res.data.data._id)
+        const res = await axios.get(`${BACKEND_API}/bybrand/${categoryId}`);
+        console.log(res.data);
+        if (res.data.isFind) {
+          console.log(res.data.data._id);
+          byMainCategory(res.data.data.maincategory._id);
+          setSelectedBrand(categoryId);
+          setSelectedCategory(res.data.data._id);
         }
       } catch (error) {
         console.log(error);
       }
     }
-   if (isName ==="mainCategory") byMainCategory(categoryId);
-   if (isName ==="subCategory")bySubCategories() 
-   if (isName === "brand")byBrand()
-  }, [categoryId ,page]);
+    if (isName === "mainCategory") byMainCategory(categoryId);
+    if (isName === "subCategory") bySubCategories();
+    if (isName === "brand") byBrand();
+  }, [categoryId, page]);
 
   const sortedProducts = products.filter((product) => {
     if (selectedCategory !== "all" && product.category !== selectedCategory)
@@ -113,57 +112,56 @@ const Product = ({categoryId, isName}) => {
       <div
         className="card h-100 shadow-lg border-0 position-relative overflow-hidden"
         style={{ borderRadius: "20px", transition: "all 0.3s ease" }}
-        >
-      <Link to={`/productDetail/${product._id}`}>
-        <div className="position-relative overflow-hidden">
-          <img
-            src={product.pic1}
-            alt={product.productname}
-            className="card-img-top"
-            style={{
-              height: "250px",
-              objectFit: "cover",
-              transition: "transform 0.5s ease",
-            }}
-            onMouseOver={(e) => (e.target.style.transform = "scale(1.1)")}
-            onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
-            />
-          {
-            <span
-              className={`position-absolute top-0 start-0 m-3 badge bg-dark text-white px-3 py-2`}
+      >
+        <Link to={`/productDetail/${product._id}`}>
+          <div className="position-relative overflow-hidden">
+            <img
+              src={product.pic1}
+              alt={product.productname}
+              className="card-img-top"
               style={{
-                borderRadius: "20px",
-                fontSize: "0.7rem",
-                fontWeight: "600",
+                height: "250px",
+                objectFit: "cover",
+                transition: "transform 0.5s ease",
               }}
-            >
-              - {product.discount}%
-            </span>
-          }
+              onMouseOver={(e) => (e.target.style.transform = "scale(1.1)")}
+              onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
+            />
+            {
+              <span
+                className={`position-absolute top-0 start-0 m-3 badge bg-dark text-white px-3 py-2`}
+                style={{
+                  borderRadius: "20px",
+                  fontSize: "0.7rem",
+                  fontWeight: "600",
+                }}
+              >
+                - {product.discount}%
+              </span>
+            }
 
-          <div
-            className="position-absolute top-0 end-0 m-3 d-flex flex-column gap-2"
-            style={{ opacity: 0, transition: "opacity 0.3s ease" }}
-            onMouseOver={(e) => (e.currentTarget.style.opacity = 1)}
-            onMouseOut={(e) => (e.currentTarget.style.opacity = 0)}
-          >
-            <button
-              className="btn btn-light btn-sm rounded-circle p-2 shadow"
-              onClick={() => {
-                isLogin
-                  ? addToWishlist(product._id)
-                  : alert(" plz login your Account !");
-              }}
+            <div
+              className="position-absolute top-0 end-0 m-3 d-flex flex-column gap-2"
+              style={{ opacity: 0, transition: "opacity 0.3s ease" }}
+              onMouseOver={(e) => (e.currentTarget.style.opacity = 1)}
+              onMouseOut={(e) => (e.currentTarget.style.opacity = 0)}
             >
-              <Heart size={16} />
-            </button>
-            <button className="btn btn-light btn-sm rounded-circle p-2 shadow">
-              <Eye size={16} />
-            </button>
+              <button
+                className="btn btn-light btn-sm rounded-circle p-2 shadow"
+                onClick={() => {
+                  isLogin
+                    ? addToWishlist(product._id)
+                    : alert(" plz login your Account !");
+                }}
+              >
+                <Heart size={16} />
+              </button>
+              <button className="btn btn-light btn-sm rounded-circle p-2 shadow">
+                <Eye size={16} />
+              </button>
+            </div>
           </div>
-        </div>
-          </Link>
-       
+        </Link>
 
         <div className="card-body p-4">
           <h5
@@ -213,6 +211,9 @@ const Product = ({categoryId, isName}) => {
               e.target.style.background =
                 "linear-gradient(135deg, #007bff, #6f42c1)";
               e.target.style.transform = "translateY(0)";
+            }}
+            onClick={() => {
+              addProductToCart(product._id, 1);
             }}
           >
             <ShoppingCart size={18} />
@@ -528,7 +529,9 @@ const Product = ({categoryId, isName}) => {
                               "linear-gradient(135deg, #007bff, #6f42c1)";
                             e.target.style.transform = "translateY(0)";
                           }}
-                          onClick={()=>{setPage(idx+1)}}
+                          onClick={() => {
+                            setPage(idx + 1);
+                          }}
                         >
                           {idx + 1}
                         </button>

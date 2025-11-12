@@ -14,7 +14,7 @@ const Order = require('./model/order');
 // const { populate } = require("./model/wishlist");
 
 app.use(cors({
-  origin  :  ["http://localhost:3000",] , 
+  origin  :  ["http://localhost:3000", "https://e-commerce-urlt.vercel.app/"] , 
   credentials : true 
 }));
 app.use(express.json());
