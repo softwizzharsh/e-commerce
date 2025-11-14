@@ -40,7 +40,6 @@ router.get("/:userId", async (req, res) => {
     if (cart == null) {
       return  res.status(200).json({isError : true});
     }
-    console.log(cart)
     res.status(200).json(cart.products);
   } catch (error) {
     res.status(500).json({ error: error.message });

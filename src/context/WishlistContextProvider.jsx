@@ -6,9 +6,10 @@ import {BACKEND_API} from "../backendApi"
 export const wishlistContext = createContext();
 function WishlistContextProvider({ children }) {
   const [wishlist, setWishlist] = useState({});
-  const userId = localStorage.getItem("userID");
   async function addToWishlist(id) {
+    const userId = localStorage.getItem("userID");
     try {
+      console.log(userId)
       if (userId) {
         const res = await fetch(
           `${BACKEND_API}/api/wishlist/${userId}/add`,
@@ -33,6 +34,7 @@ function WishlistContextProvider({ children }) {
   }
   
   async function getWishlist() {
+     const userId = localStorage.getItem("userID");
       try {
         const res =  await fetch(`${BACKEND_API}/api/wishlist/${userId}`)
         const data = await res.json()
@@ -42,14 +44,17 @@ function WishlistContextProvider({ children }) {
       }
   }
   
-  useEffect(()=>{
-    if(userId){
-      getWishlist()
-    }
-  } , [userId])
+  const userId = localStorage.getItem("userID");
+
+  // useEffect(()=>{
+  //   if(userId){
+  //     getWishlist()
+  //   }
+  // } , [userId])
 
     // Remove from wishlist
   const handleRemove = async (productId) => {
+     const userId = localStorage.getItem("userID");
     try {
       await axios.delete(`${BACKEND_API}/api/wishlist/${userId}/remove`, {
         data: { productId },
@@ -61,7 +66,7 @@ function WishlistContextProvider({ children }) {
   };
   return (
     <div>
-      <wishlistContext.Provider value={{ addToWishlist , wishlist ,handleRemove }}>
+      <wishlistContext.Provider value={{ addToWishlist , wishlist ,handleRemove , getWishlist }}>
         {children}
       </wishlistContext.Provider>
     </div>

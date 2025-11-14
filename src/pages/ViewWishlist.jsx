@@ -1,8 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { wishlistContext } from "../context/WishlistContextProvider";
 import { Link } from "react-router-dom";
 function ViewWishlist() {
-  const { wishlist, handleRemove } = useContext(wishlistContext);
+  const { wishlist, handleRemove, getWishlist } = useContext(wishlistContext);
+  useEffect(() => {
+    getWishlist();
+  }, []);
   return (
     <div>
       <div className="container my-4">
