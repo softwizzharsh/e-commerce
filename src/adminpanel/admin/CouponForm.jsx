@@ -6,7 +6,7 @@ function CouponForm() {
   const [couponCode, setCouponCode] = useState("");
   const [amount, setAmount] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
-  const backendApi = `${BACKEND_API}/`
+  const backendApi = `${BACKEND_API}/api/`
   // Generate random coupon code
   const generateCoupon = () => {
     const randomCode = "CPN-" + Math.random().toString(36).substring(2, 10).toUpperCase();

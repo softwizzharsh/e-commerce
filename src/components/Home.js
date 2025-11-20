@@ -1,4 +1,3 @@
-import React, { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
@@ -16,14 +15,28 @@ import Latest from "./Latest";
 import Featured from "./Featured";
 import { AuthContext } from "../context/AuthProviderContext";
 import { useContext } from "react";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { BACKEND_API } from "../backendApi";
+import { Autoplay } from "swiper/modules";
 register();
 
 export default function Home() {
-  const [swiperInstance2, setSwiperInstance2] = useState(null);
-  const [swiperInstance3, setSwiperInstance3] = useState(null);
-  const [swiperInstance4, setSwiperInstance4] = useState(null);
   const { blogs } = useContext(AuthContext);
+  const [mainCategories, setMainCategory] = useState([]);
+  async function getMainCategory() {
+    try {
+      const res = await axios.get(`${BACKEND_API}/api/maincategory`);
+      setMainCategory(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    getMainCategory();
+  }, []);
+  console.log(mainCategories);
+
   return (
     <>
       <section class="py-3 section1">
@@ -36,10 +49,15 @@ export default function Home() {
                     {/* <div class="swiper-wrapper"> */}
 
                     <Swiper
+                     modules={[Autoplay]}
                       spaceBetween={3}
                       slidesPerView={1}
                       pagination={true}
                       loop={true}
+                      autoplay={{
+                        delay: 1500,
+                        disableOnInteraction: false,
+                      }}
                       style={{
                         "--swiper-pagination-color": "#fff",
                       }}
@@ -58,12 +76,12 @@ export default function Home() {
                               keep you stylish and comfortable. Shop the newest
                               looks before they’re gone.
                             </p>
-                            <a
-                              href="#"
+                            <Link
+                              to={`product/${mainCategories[2]?._id}?isName=mainCategory`}
                               className="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1 px-4 py-3 mt-3"
                             >
                               Shop Now
-                            </a>
+                            </Link>
                           </div>
                           <div className="img-wrapper col-md-5 text-center">
                             <img
@@ -89,12 +107,12 @@ export default function Home() {
                               premium clothing range crafted for modern comfort
                               and timeless style.
                             </p>
-                            <a
-                              href="#"
+                            <Link
+                              to={`product/${mainCategories[0]?._id}?isName=mainCategory`}
                               className="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1"
                             >
                               Explore Collection
-                            </a>
+                            </Link>
                           </div>
                           <div className="img-wrapper col-md-5 text-center">
                             <img
@@ -120,12 +138,12 @@ export default function Home() {
                               denim jackets, jeans, and shirts — perfect for all
                               seasons and styles.
                             </p>
-                            <a
-                              href="#"
+                            <Link
+                              to={`product/${mainCategories[1]?._id}?isName=mainCategory`}
                               className="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1"
                             >
                               View More
-                            </a>
+                            </Link>
                           </div>
                           <div className="img-wrapper col-md-5 text-center">
                             <img
@@ -148,12 +166,15 @@ export default function Home() {
                     <div class="content-wrapper col-md-7">
                       <div class="categories sale mb-3 pb-3">20% off</div>
                       <h3 class="banner-title">Women's Collection</h3>
-                      <a href="#" class="d-flex align-items-center nav-link">
+                      <Link
+                        to={`product/${mainCategories[1]?._id}?isName=mainCategory`}
+                        class="d-flex align-items-center nav-link"
+                      >
                         Shop Collection{" "}
                         <svg width="24" height="24">
                           <use xlinkHref="#arrow-right"></use>
                         </svg>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -162,12 +183,15 @@ export default function Home() {
                     <div class="content-wrapper col-md-7">
                       <div class="categories sale mb-3 pb-3">15% off</div>
                       <h3 class="item-title">Men's Collection</h3>
-                      <a href="#" class="d-flex align-items-center nav-link">
+                      <Link
+                        to={`product/${mainCategories[2]?._id}?isName=mainCategory`}
+                        class="d-flex align-items-center nav-link"
+                      >
                         Shop Collection{" "}
                         <svg width="24" height="24">
                           <use xlinkHref="#arrow-right"></use>
                         </svg>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -197,9 +221,11 @@ export default function Home() {
                     Separated they live in Bookmarksgrove right at the coast of
                     the Semantics, a large language ocean.
                   </p>
-                  <a href="#" class="btn btn-dark text-uppercase">
+                  <Link 
+                   to={`product/${mainCategories[2]?._id}?isName=mainCategory`} 
+                  class="btn btn-dark text-uppercase">
                     Show Now
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -214,9 +240,11 @@ export default function Home() {
                     Separated they live in Bookmarksgrove right at the coast of
                     the Semantics, a large language ocean.
                   </p>
-                  <a href="#" class="btn btn-dark text-uppercase">
+                  <Link
+                    to={`product/${mainCategories[1]?._id}?isName=mainCategory`} 
+                   class="btn btn-dark text-uppercase">
                     Show Now
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -283,9 +311,9 @@ export default function Home() {
                     </div>
                     <div class="d-grid gap-2">
                       <Link to={"login"}>
-                      <button type="submit" class="btn btn-dark btn-lg">
-                        Get Discount
-                      </button>
+                        <button type="submit" class="btn btn-dark btn-lg">
+                          Get Discount
+                        </button>
                       </Link>
                     </div>
                   </form>
@@ -394,7 +422,6 @@ export default function Home() {
           <div class="bg-warning py-5 rounded-5 div2">
             <div class="container">
               <div class="row">
-              
                 <div class="col-md-9">
                   <h2 class="my-5">Shop smarter with the StyleMart App</h2>
                   <p>

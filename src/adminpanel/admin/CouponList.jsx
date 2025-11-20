@@ -8,7 +8,7 @@ function CouponList() {
   // Fetch all coupons
   const fetchCoupons = async () => {
     try {
-      const res = await fetch(`${backendApi}/coupon`);
+      const res = await fetch(`${backendApi}/api/coupon`);
       const data = await res.json();
       setCoupons(data);
     } catch (err) {
@@ -19,7 +19,7 @@ function CouponList() {
   // Delete coupon
   const deleteCoupon = async (id) => {
     try {
-      const res = await fetch(`${backendApi}/coupon/${id}`, {
+      const res = await fetch(`${backendApi}/api/coupon/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {

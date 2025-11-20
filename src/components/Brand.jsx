@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
-import {BACKEND_API} from "../backendApi"
+import { BACKEND_API } from "../backendApi";
+import { Autoplay } from "swiper/modules";
 function Brand() {
-  const [swiperInstance1, setSwiperInstance1] = useState(null);
+  const [swiperInstance1, setSwiperInstance1] = useState("");
   const [items, setItems] = useState([]);
   useEffect(() => {
     fetch(`${BACKEND_API}/api/brands`)
@@ -12,7 +13,7 @@ function Brand() {
       .catch((err) => console.error("Error fetching data: ", err));
   }, []);
 
-  console.log(items)
+  console.log(items);
 
   return (
     <>
@@ -49,38 +50,41 @@ function Brand() {
               <div class="brand-carousel swiper">
                 {/* <div class="swiper-wrapper"> */}
                 <Swiper
+                  modules={[Autoplay]}
                   spaceBetween={10}
                   slidesPerView={4}
                   loop={true}
+                  autoPlay={{
+                    delay: 1500,
+                    disableOnInteraction: false,
+                  }}
                   onSwiper={setSwiperInstance1} // Set the Swiper instance when it's initialized
                   style={{ "--swiper-pagination-color": "#fff" }}
                 >
-                  {items.map(({brandname , category , _id}) => {
+                  {items.map(({ brandname, category, _id }) => {
                     return (
                       <SwiperSlide key={_id}>
                         <Link to={`/product/${_id}?isName=brand`}>
-                        <div class="card mb-3 p-3 rounded-4 shadow border-0">
-                          <div class="row g-0">
-                            <div class="col-md-4">
-                              <img
-                                src={category.pic1}
-                                class="img-fluid rounded"
-                                alt="Card title"
-                              />
-                            </div>
-                            <div class="col-md-8">
-                              <div class="card-body py-0">
-                                <p class="text-muted mb-0">{brandname}</p>
-                                <h5 class="card-title">
-                                  Honey best nectar you wish to get
-                                  helll 
-                                </h5>
+                          <div class="card mb-3 p-3 rounded-4 shadow border-0">
+                            <div class="row g-0">
+                              <div class="col-md-4">
+                                <img
+                                  src={category.pic1}
+                                  class="img-fluid rounded"
+                                  alt="Card title"
+                                />
+                              </div>
+                              <div class="col-md-8">
+                                <div class="card-body py-0">
+                                  <p class="text-muted mb-0">{brandname}</p>
+                                  <h5 class="card-title">
+                                    Honey best nectar you wish to get helll
+                                  </h5>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
                         </Link>
-
                       </SwiperSlide>
                     );
                   })}

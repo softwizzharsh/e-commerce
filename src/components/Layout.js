@@ -5,26 +5,23 @@ import { AuthContext } from "../context/AuthProviderContext";
 import { addToCartContext } from "../context/AddToCartContextProvider";
 import userProfile from "../logo.svg";
 import axios from "axios";
-import {BACKEND_API} from "../backendApi"
+import { BACKEND_API } from "../backendApi";
 export default function Layout() {
- 
   const [mainCategories, setMainCategory] = useState([]);
   const [userInfo, setUserInfo] = useState({});
   const { isLogin, setIsLogin } = useContext(AuthContext);
-   let {cartItems , calculateTotal}  = useContext(addToCartContext)
+  let { cartItems, calculateTotal } = useContext(addToCartContext);
   const [allSubCategory, setAllSubCategory] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [results, setResults] = useState([]);
-  const navigate =  useNavigate()
-  
+  const navigate = useNavigate();
+
   const handleSearch = async (e) => {
     e.preventDefault();
-    navigate(`/search?q=${searchText}&category=${selectedCategory}`)
-    
+    navigate(`/search?q=${searchText}&category=${selectedCategory}`);
   };
 
-  
   async function getSubCategory() {
     try {
       const res = await axios.get(`${BACKEND_API}/api/subcategories`);
@@ -55,7 +52,7 @@ export default function Layout() {
     if (!token) {
       return;
     }
-    console.log(cartItems)
+    console.log(cartItems);
 
     fetch(`${BACKEND_API}/api/checkToken?token=${token}`)
       .then((res) => res.json())
@@ -255,12 +252,13 @@ export default function Layout() {
         <div class="offcanvas-body">
           <div class="order-md-last">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
-            
-              <span class="text-primary">Your cart</span>
-              <span class="badge bg-primary rounded-pill">{console.log(cartItems?.length)}</span>
+              <span class="text-primary">Your cart </span>
+              <span class="badge bg-primary rounded-pill">
+                {cartItems?.length}
+              </span>
             </h4>
             <ul class="list-group mb-3">
-              {cartItems.length === 0  && (
+              {cartItems.length === 0 && (
                 <div>
                   <div className="card-body text-center p-5">
                     <i className="fas fa-shopping-cart fa-4x text-muted mb-3"></i>
@@ -293,9 +291,14 @@ export default function Layout() {
                 );
               })}
             </ul>
-            {cartItems?.length > 0  && (
+            {cartItems?.length > 0 && (
               <Link to={"/cart"}>
-                <button class="w-100 btn btn-primary btn-lg" type="submit">
+                <button
+                  type="button"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                  class="w-100 btn btn-primary btn-lg"
+                >
                   View Cart
                 </button>
               </Link>
@@ -400,35 +403,37 @@ export default function Layout() {
                 </div>
               </div> */}
               <div className="search-bar row bg-light p-2 my-2 rounded-4">
-        <div className="col-md-4 d-none d-md-block">
-          <select
-            className="form-select border-0 bg-transparent"
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-          >
-            <option value="">All Categories</option>
-            {allSubCategory.map((val) => (
-              <option key={val._id} value={val._id}>
-                {val.subcategoryname} {val.gender}
-              </option>
-            ))}
-          </select>
-        </div>
+                <div className="col-md-4 d-none d-md-block">
+                  <select
+                    className="form-select border-0 bg-transparent"
+                    value={selectedCategory}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
+                  >
+                    <option value="">All Categories</option>
+                    {allSubCategory.map((val) => (
+                      <option key={val._id} value={val._id}>
+                        {val.subcategoryname} {val.gender}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-        <div className="col-11 col-md-7">
-          <form id="search-form" className="text-center" onSubmit={handleSearch}>
-            <input
-              type="text"
-              className="form-control border-0 bg-transparent"
-              placeholder="Search for more than 20,000 products"
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-            />
-          </form>
-        </div>
-
-       
-      </div>
+                <div className="col-11 col-md-7">
+                  <form
+                    id="search-form"
+                    className="text-center"
+                    onSubmit={handleSearch}
+                  >
+                    <input
+                      type="text"
+                      className="form-control border-0 bg-transparent"
+                      placeholder="Search for more than 20,000 products"
+                      value={searchText}
+                      onChange={(e) => setSearchText(e.target.value)}
+                    />
+                  </form>
+                </div>
+              </div>
             </div>
 
             <div class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
@@ -479,7 +484,10 @@ export default function Layout() {
                   aria-controls="offcanvasCart"
                 >
                   <span class="fs-6 text-muted dropdown-toggle">Your Cart</span>
-                  <span class="cart-total fs-5 fw-bold"> ₹ {calculateTotal()}</span>
+                  <span class="cart-total fs-5 fw-bold">
+                    {" "}
+                    ₹ {calculateTotal()}
+                  </span>
                 </button>
               </div>
             </div>
@@ -515,17 +523,22 @@ export default function Layout() {
                   </div>
 
                   <div class="offcanvas-body">
-                    <select class="filter-categories border-0 mb-0 me-5">
+                    <select
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        navigate(value);
+                      }}
+                      class="filter-categories border-0 mb-0 me-5"
+                    >
                       <option>Shop by Departments</option>
-                       {mainCategories.map((val) => {
+                      {mainCategories.map((val) => {
                         return (
-                          <option class="nav-item active" key={val._id}>
-                            <Link
-                              class="nav-link"
-                              to={`product/${val._id}?isName=mainCategory`}
-                            >
-                              {val.maincategory}
-                            </Link>
+                          <option
+                            class="nav-item active"
+                            value={`product/${val._id}?isName=mainCategory`}
+                            key={val._id}
+                          >
+                            {val.maincategory}
                           </option>
                         );
                       })}
@@ -644,17 +657,17 @@ export default function Layout() {
                       </li> */}
                       {isLogin ? (
                         <>
-                           <li class="nav-item">
-                        <Link to={"wishlist"} class="nav-link">
-                          wishlist
-                        </Link>
-                      </li>
-                         <li class="nav-item">
+                          <li class="nav-item">
+                            <Link to={"wishlist"} class="nav-link">
+                              wishlist
+                            </Link>
+                          </li>
+                          <li class="nav-item">
                             <Link to="allOrders" class="nav-link">
                               Orders
                             </Link>
                           </li>
-                        
+
                           <li class="nav-item">
                             <Link
                               to={"/"}
@@ -692,8 +705,6 @@ export default function Layout() {
           </div>
         </div>
       </header>
-
-       
 
       <Outlet />
 
@@ -910,12 +921,12 @@ export default function Layout() {
                     placeholder="Email Address"
                     aria-label="Email Address"
                   />
-                  <button
+                  <a
                     class="btn btn-dark rounded-end rounded-0"
-                    type="submit"
+                    href="mailto:softwizz@gmail.com"
                   >
                     Subscribe
-                  </button>
+                  </a>
                 </form>
               </div>
             </div>
@@ -926,7 +937,7 @@ export default function Layout() {
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-6 copyright">
-              <p>© 2025 Lolypop. All rights reserved.</p>
+              <p>© 2025 Lolipop. All rights reserved.</p>
             </div>
             <div class="col-md-6 credit-link text-start text-md-end">
               <p>Powered By SOFTWIZZ</p>
