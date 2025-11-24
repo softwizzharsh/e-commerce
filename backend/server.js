@@ -6,15 +6,14 @@ const jwt = require("jsonwebtoken");
 const app = express();
 const JWT_SECRET = "frmrefrjj5tj^%*&(&)(U)(IU)(DS)(@#(IDkj";
 const PORT = 8000;
-// import bcrypt from "bcrypt";
+
 const wishlistRoutes = require("./routes/wishlistRoutes")
 const cartRouters = require("./routes/cart")
 const orderRoutes = require("./routes/order");
 const Order = require('./model/order');
-// const { populate } = require("./model/wishlist");
 
 app.use(cors({
-  origin  :  ["http://localhost:3000", "https://e-commerce-urlt.vercel.app/"] , 
+  origin  :  ["http://localhost:3000", "https://e-commerce-urlt.vercel.app"] , 
   credentials : true 
 }));
 app.use(express.json());
