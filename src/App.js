@@ -48,6 +48,11 @@ import AddBlog from "./adminpanel/admin/AddBlog.jsx";
 import ViewBlogs from "./adminpanel/admin/ViewBlogs.jsx";
 import AllBlog from "./pages/AllBlog.jsx";
 import BlogDetails from "./pages/BlogDetails.jsx";
+import ContactPage from "./pages/ContactPage.jsx";
+import ViewContact from "./adminpanel/admin/ViewContact.jsx";
+import TnC from "./pages/TnC.jsx";
+import Faq from "./pages/FAQ.jsx"
+import FaqAdmin from "./adminpanel/admin/FAQ.jsx";
 function App() {
   return (
     <div className="App">
@@ -59,12 +64,14 @@ function App() {
                 <Route path="/admin" element={<Adminlayout />}>
                   <Route index element={<Dashboard />} />
                   <Route path="productadd" element={<Productadd />} />
+                  <Route path="viewcontact" element={<ViewContact />} />
                   <Route path="productview" element={<Productview />} />
                   <Route path="maincategoryadd" element={<MaincategoryAdd />} />
                   <Route
                     path="maincategoryview"
                     element={<Maincategoryview />}
                   />
+                  <Route path="faq" element={<FaqAdmin />} />
                   <Route path="categoryadd" element={<Categoryadd />} />
                   <Route path="categoryview" element={<Categoryview />} />
                   <Route path="subcategoryadd" element={<Subcategoryadd />} />
@@ -107,11 +114,14 @@ function App() {
                   <Route path="login" element={<Login />} />
                   <Route path="sign" element={<Sign />} />
                   <Route path="cart" element={<CartView />} />
+                  <Route path="Contact" element={<ContactPage />} />
                   <Route path="blogs" element={<AllBlog />} />
                   <Route path="blog/:id" element={<BlogDetails />} />
                   <Route path="checkout" element={<CheckoutPage />} />
                   <Route path="orderConfirmation" element={<OrderConfirmationPage />} />
                   <Route path="allOrders" element={<AllOrders />} />
+                  <Route path="tnc" element={<TnC />} />
+                  <Route path="faq" element={<Faq />} />
                   <Route path="search" element={<SearchData />} />
                 </Route>
               </Routes>

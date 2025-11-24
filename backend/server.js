@@ -11,7 +11,8 @@ const wishlistRoutes = require("./routes/wishlistRoutes")
 const cartRouters = require("./routes/cart")
 const orderRoutes = require("./routes/order");
 const Order = require('./model/order');
-
+const contactRoute = require('./routes/contactRoute');
+// import  contactRouter from "./routes/contactRoute" 
 app.use(cors({
   origin  :  ["http://localhost:3000", "https://e-commerce-urlt.vercel.app"] , 
   credentials : true 
@@ -22,6 +23,8 @@ app.use(express.json());
 app.use("/api/wishlist", wishlistRoutes);
 app.use("/api/cart", cartRouters);
 app.use("/api/orders", orderRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api", contactRoute);
 
 // const dbURI = "mongodb://localhost:27017";
 const dbURI = "mongodb+srv://softwizzharsh_db_user:81MZ3DfjlVPmOX9d@cluster0.h1usotm.mongodb.net/?appName=Cluster0";
@@ -940,6 +943,61 @@ app.get("/api/blog/:id", async (req, res) => {
   }
 });
 
+
+const faqSchema = new mongoose.Schema({
+  question: { type: String, required: true },
+  answer: { type: String, required: true },
+}, { timestamps: true });
+ 
+const FAQ =  mongoose.model("FAQ", faqSchema);
+
+app.post("/api/faq", async (req, res) => {
+  try {
+    const { question, answer } = req.body;
+
+    if (!question || !answer) {
+      return res.status(400).json({ message: "All fields required" });
+    }
+
+    const faq = await FAQ.create({ question, answer });
+    res.status(201).json({ message: "FAQ added", faq });
+
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// Get all FAQ
+app.get("/api/faq", async (req, res) => {
+  try {
+    const faqs = await FAQ.find()
+    res.json(faqs);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+app.put("/api/faq/:id", async (req, res) => {
+  try {
+    const faq = await FAQ.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.json(faq);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to update FAQ" });
+  }
+});
+
+app.delete("/api/faq/:id", async (req, res) => {
+  try {
+    await FAQ.findByIdAndDelete(req.params.id);
+    res.json({ message: "FAQ Deleted" });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to delete FAQ" });
+  }
+});
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
 });
